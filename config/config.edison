@@ -1,0 +1,101 @@
+# Config file for linking against packages provided by the
+# TOAST dependencies at NERSC.  You should load the correct
+# version of the "toast-deps" module for the system you are
+# building on.
+
+# =============== Installation ===================
+
+# Final install location.  This defaults to a
+# subdirectory of the top-level directory called
+# install_$COMMANDER.
+#export INSTALL := /usr/local
+
+
+# =============== System Tools ===================
+
+# The defaults should be fine for any normal
+# GNU/Linux operating system...
+
+# Here you can override the make version to use
+#export MAKE := gmake
+
+# How to make a tar.gz file
+#export CTAR := tar czvf
+
+# The archive command
+#export AR := ar
+
+# Archive options to create a library
+#export ARFLAGS := crv
+
+# The ranlib command
+#export RANLIB := ranlib
+
+
+# ================= Compilers ====================
+
+# Serial Fortran 90 compiler.  Default is "f90".
+export F90 := ifort
+
+# MPI Fortran 90 compiler.  Default is "mpif90".
+export MPF90 := ftn
+
+# MPI Fortran 77 compiler.  Default is "mpif77".
+export MPF77 := ftn
+
+# MPI C compiler.  Default is "mpicc".
+export MPCC := cc
+
+# MPI C++ compiler.  Default is "mpicxx".
+export MPCXX := CC
+
+
+# ============== Language Mixing =================
+
+export MPFCLIBS := -lifcoremt
+
+
+# =========== Compiler Optimizations =============
+
+# FIXME! the line length option is gfortran specific, but I 
+# gave up hacking the code to make it conform to the standard
+# line length limit.
+
+# Fortran 90 compiler flags
+export F90FLAGS := -O3 -g -fPIC -xavx -fexceptions -pthread -qopenmp
+
+# Fortran 77 compiler flags
+export FFLAGS := -O3 -g -fPIC -xavx -fexceptions -pthread -qopenmp
+
+# C compiler flags.
+export CFLAGS := -O3 -g -fPIC -xavx -pthread -qopenmp
+
+# C++ compiler flags.
+export CXXFLAGS := -O3 -g -fPIC -xavx -pthread -qopenmp
+
+# Extra flags used for linking
+export LDFLAGS := -lstdc++ -lpthread -liomp5
+
+
+# ============== Fortran Features ================
+
+# Set this variable to 1 if the fortran compiler
+# produces module files with capitalization (*.MOD)
+# instead of lowercase (*.mod).
+#export FORTRAN_UPPER := 1
+
+# =============== CFITSIO Linking ================
+# The include and linking commands for cfitsio.
+export CFITSIO_LINK := -lcfitsio -limf
+
+# =============== LAPACK Linking =================
+export LAPACK_LINK := -L$(MKLROOT)/lib/intel64 -lmkl_rt -liomp5 -lpthread -limf -ldl
+
+# ================ Healpix linking ================
+export HEALPIX_INCLUDE := 
+export HEALPIX_LINK := -lhealpix
+
+# =============== HDF ============================
+export HDF_LINK := -lhdf5_fortran -lhdf5 
+export HDF_LINK_CPP := -lhdf5_cpp -lhdf5 
+export HDF_INCLUDE := -I/usr/lib64/gfortran/modules
